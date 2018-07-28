@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+const logger = require('logger').logger;
+
+const dbRunner = require('./runners/db.js');
+const webRunner = require('./runners/web.js');
+
+const Cardmodel = require('models/card.js');
+
+Promise.resolve()
+  .then(dbRunner)
+  .then(webRunner)
+  .then(() => {
+    logger.info('application is run');
+
+    const card = new Cardmodel();
+
+    card.name = 'testName';
+    card.save().then((doc) => {
+      logger.info('save', doc);
+    });
+  })
+  .catch(err => {
+    if(err) {
+      logger.error(err);
+    }
+
+    logger.error('application run is failed');
+    process.exit(1);
+});
