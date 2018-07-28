@@ -8,6 +8,19 @@ const sessionMW = require('storage/session').mw;
 const passport = require('passport');
 const path = require('path');
 
+
+//offline\online http routes
+
+/*const isRoutesAvailable = false;
+const setRoutesAvailable = (status) => {
+  if (setRoutesAvailable === status) {
+    logger.debug(`routes available is already ${status}`)
+    return;
+  }
+
+  isRoutesAvailable = status;
+}*/
+
 const staticDir = config.get('httpServer:staticDir');
 
 const indexRouter = require('./routes/index');
